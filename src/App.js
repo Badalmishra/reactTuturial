@@ -40,14 +40,33 @@ class App extends React.Component {
     ourTargetTask.status = ourTargetTask.status == 0?1:0
     this.setState({todos:array})
   }
+  deleteTask(id) {
+    console.log('id from list:: ',id)
+
+    let array = this.state.todos.filter(singleTodo=>{return singleTodo.id!=id})
+    this.setState({todos:array})
+  }
+  addTodo(body){
+    // this.setState({
+    //   todos:[
+    //           ...this.state.todos,
+    //           {id:Math.random(),body:body,status:1}
+    //         ]
+    // })
+    let todos = this.state.todos
+    let newTask = {id:Math.random(),body:body,status:0}
+    todos.push(newTask)
+    this.setState({todos:todos})    
+  }
   render(){
     return (
       <div style={{display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center'}}>
           <List 
             togglePending={(id)=>this.togglePending(id)} 
             todos={this.state.todos}
+            deleteTask={(id)=>this.deleteTask(id)}
               />
-          <Form/>
+          <Form addTodo={(body)=>this.addTodo(body)}/>
       </div>
     );
   }

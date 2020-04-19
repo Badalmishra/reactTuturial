@@ -17,7 +17,7 @@ class List extends React.Component {
                                                 Mark {task.status == 0 ?'Done':'Pending'}
                                         </button>
                         
-                                    <button className="btn btn-sm btn-danger">Delete</button>
+                                    <button onClick={()=>this.props.deleteTask(task.id)} className="btn btn-sm btn-danger">Delete</button>
                                 </div>
                                 <span 
                                     style={{
