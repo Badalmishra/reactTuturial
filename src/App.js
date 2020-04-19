@@ -1,74 +1,33 @@
 import React from 'react';
-import List from './components/List';
-import Form from './components/Form';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
+import Todo from './components/Todo';
+import Message from './components/Message';
+import Header from './components/Header';
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      todos:[
-        {
-          id:1,
-          body:'nacho bc!',
-          status:1
-        },
-        {
-          id:2,
-          body:'khao bc!',
-          status:0
-        },
-        {
-          id:3,
-          body:'aish karo bc!',
-          status:1
-        },
-      ]
-    }
-  }
-  componentDidMount(){
-    // this.markDone(2)
-  }
-
-  togglePending(id){
-    console.log('id from list:: ',id)
-
-    let array = this.state.todos
-    let ourTargetTask = array.find(elem => {return elem.id == id})
-    ourTargetTask.status = ourTargetTask.status == 0?1:0
-    this.setState({todos:array})
-  }
-  deleteTask(id) {
-    console.log('id from list:: ',id)
-
-    let array = this.state.todos.filter(singleTodo=>{return singleTodo.id!=id})
-    this.setState({todos:array})
-  }
-  addTodo(body){
-    // this.setState({
-    //   todos:[
-    //           ...this.state.todos,
-    //           {id:Math.random(),body:body,status:1}
-    //         ]
-    // })
-    let todos = this.state.todos
-    let newTask = {id:Math.random(),body:body,status:0}
-    todos.push(newTask)
-    this.setState({todos:todos})    
-  }
   render(){
-    return (
-      <div style={{display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center'}}>
-          <List 
-            togglePending={(id)=>this.togglePending(id)} 
-            todos={this.state.todos}
-            deleteTask={(id)=>this.deleteTask(id)}
-              />
-          <Form addTodo={(body)=>this.addTodo(body)}/>
-      </div>
-    );
+    return(
+      <Router>
+        <Header/>
+        <Switch>
+          <Route exact path="/">
+            <Todo/>  
+          </Route>
+          <Route path="/message">
+            <Message/>  
+          </Route>
+        </Switch>
+      
+      </Router>
+    )
   }
 }
 
