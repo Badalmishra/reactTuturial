@@ -31,9 +31,7 @@ class Todo extends React.Component {
     // this.markDone(2)
   }
 
-  getTodos(){
-    fetch()// set state with server data
-  }
+
   togglePending(id){
     console.log('id from list:: ',id)
 
@@ -46,7 +44,9 @@ class Todo extends React.Component {
     console.log('id from list:: ',id)
 
     let array = this.state.todos.filter(singleTodo=>{return singleTodo.id!=id})
-    this.setState({todos:array})
+    this.setState({todos:array}) //async 
+    console.log(this.state.todos)
+    
   }
   addTodo(body){
     // this.setState({
