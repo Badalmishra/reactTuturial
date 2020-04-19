@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './components/Header';
-import Body from './components/Body';
+import List from './components/List';
+import Form from './components/Form';
 
 import './App.css';
 
@@ -9,19 +9,28 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      username : "abc"
+      todos:[
+        {
+          body:'nacho bc!',
+          status:1
+        },
+        {
+          body:'khao bc!',
+          status:0
+        },
+        {
+          body:'aish karo bc!',
+          status:1
+        },
+      ]
     }
   }
-  changeName() {
-    this.setState({username:'new name'})
-  }
+
   render(){
     return (
-      <div>
-        <Header name={this.state.username}/>
-        <hr/>
-        <Body changeName={() => this.changeName()} name={this.state.username}/>
-
+      <div style={{display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center'}}>
+          <List todos={this.state.todos}/>
+          <Form/>
       </div>
     );
   }
