@@ -7,19 +7,26 @@ class List extends React.Component {
                 {
                     this.props.todos.map(task=>(
                         
-                        <li className="list-group-item">
+                        <li key={task.id} className="list-group-item">
                             <div style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
                                 <div style={{flex:1}} className="btn-group">
-                                    {
-                                        task.status == 0 
-                                        ? 
-                                            <button className="btn btn-sm btn-success">Done</button>
-                                            : 
-                                            <button className="btn btn-sm btn-dark">Pending</button>
-                                    }
+                                    
+                                        <button
+                                            onClick={()=>this.props.togglePending(task.id)}
+                                            className={task.status==0?"btn btn-sm btn-success":"btn btn-sm btn-dark"}>
+                                                Mark {task.status == 0 ?'Done':'Pending'}
+                                        </button>
+                        
                                     <button className="btn btn-sm btn-danger">Delete</button>
                                 </div>
-                                <span style={{flex:4}} className="ml-3">{task.body}</span>    
+                                <span 
+                                    style={{
+                                        flex:2,
+                                        textDecoration:task.status == 1 ?'line-through':''
+                                    }} 
+                                    className="ml-3">
+                                        {task.body}
+                                </span>    
                             </div>
                         </li>
                     ))

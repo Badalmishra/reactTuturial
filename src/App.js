@@ -11,25 +11,42 @@ class App extends React.Component {
     this.state = {
       todos:[
         {
+          id:1,
           body:'nacho bc!',
           status:1
         },
         {
+          id:2,
           body:'khao bc!',
           status:0
         },
         {
+          id:3,
           body:'aish karo bc!',
           status:1
         },
       ]
     }
   }
+  componentDidMount(){
+    // this.markDone(2)
+  }
 
+  togglePending(id){
+    console.log('id from list:: ',id)
+
+    let array = this.state.todos
+    let ourTargetTask = array.find(elem => {return elem.id == id})
+    ourTargetTask.status = ourTargetTask.status == 0?1:0
+    this.setState({todos:array})
+  }
   render(){
     return (
       <div style={{display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center'}}>
-          <List todos={this.state.todos}/>
+          <List 
+            togglePending={(id)=>this.togglePending(id)} 
+            todos={this.state.todos}
+              />
           <Form/>
       </div>
     );
