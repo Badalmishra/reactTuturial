@@ -1,11 +1,22 @@
 import React from 'react'
+import { withRouter } from "react-router-dom";
 
 class Message extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state={
+            Message:''
+        }
+    }
+    componentDidMount(){
+        this.setState({Message:this.props.match.params.id})
+        console.log(this.props)
+    }
     render() {
         return (
-            <ul className="list-group w-50 mt-5">
-               you have a message
-            </ul>
+            <div className="container alert alert-primary">
+               you have a message : {this.state.Message}
+            </div>
         )
     }
 }
